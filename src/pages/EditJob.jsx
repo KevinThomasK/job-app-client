@@ -19,11 +19,14 @@ export default function EditJob({ user }) {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await axios.get(`/jobs/${id}`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
         setFormData(response.data.job);
         setIsLoading(false);
       } catch (err) {
@@ -44,11 +47,15 @@ export default function EditJob({ user }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.patch(`/jobs/${id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      await axios.patch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/jobs/${id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
       navigate("/"); // Redirect to homepage after successful update
     } catch (err) {
       setError(err.response?.data?.message || "Failed to update job");
