@@ -23,10 +23,13 @@ export default function Login({ setUser }) {
     setIsLoading(true);
 
     try {
-      const { data } = await axios.post("/auth/login", {
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
 
       setUser(data.token, data.user);
       navigate("/");

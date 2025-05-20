@@ -32,12 +32,15 @@ export default function Register({ setUser }) {
     setIsLoading(true);
 
     try {
-      const { data } = await axios.post("/auth/register", {
-        name,
-        email,
-        password,
-        role,
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/auth/register`,
+        {
+          name,
+          email,
+          password,
+          role,
+        }
+      );
 
       setUser(data.token, data.user);
       navigate("/");
